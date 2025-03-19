@@ -26,6 +26,9 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
+# application.properties 파일 무시
+application.properties
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/

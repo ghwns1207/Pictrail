@@ -32,6 +32,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	// JWT 관련 라이브러리 (jjwt)
 	implementation 'io.jsonwebtoken:jjwt:0.11.5' // JWT 라이브러리
+	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
 	// Spring Security (JWT와 통합을 위한 필수 의존성)
 	implementation 'org.springframework.security:spring-security-core'

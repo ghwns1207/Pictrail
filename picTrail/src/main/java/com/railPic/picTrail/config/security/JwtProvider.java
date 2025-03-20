@@ -16,19 +16,12 @@ public class JwtProvider {
     private static final long ONE_HOUR_IN_MILLIS = 1000 * 60 * 60; // 1시간을 밀리초로 정의
     private static final long EXPIRATION_TIME = ONE_HOUR_IN_MILLIS; // 토큰 유효 기간 설정
 
-    // 개선 포인트 2: 보안 강화 - 하드코딩 대신 외부 설정에서 키를 주입받아 보안성 향상
-    @Value("${jwt.secret}") // application.properties에서 시크릿 키를 읽어옴
-    private String SECRET_KEY; // Base64 인코딩된 256비트 이상의 키 사용 권장
-    // 서명 키를 저장하는 필드 (HMAC-SHA 서명을 위한 키)
     private final Key signingKey;
 
-    public JwtProvider() {
-        // SECRET_KEY는 Base64로 인코딩된 문자열이기 때문에 이를 디코딩하여 바이트 배열로 변환
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);  // Base64 디코딩
-
-        // HMAC-SHA 알고리즘을 사용해 서명 키를 생성
-        // `Keys.hmacShaKeyFor()`는 바이트 배열을 기반으로 HMAC-SHA 서명을 위한 키를 생성
-        this.signingKey = Keys.hmacShaKeyFor(keyBytes);  // HMAC-SHA 서명 키 생성
+    public JwtProvider(@Value("${jwt.secret}") String secretKey) {
+        // Base64 디코딩 후, HMAC-SHA 서명 키 생성
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+        this.signingKey = Keys.hmacShaKeyFor(keyBytes);
     }
 
     // 토큰에서 사용자 이름 추출 메서드

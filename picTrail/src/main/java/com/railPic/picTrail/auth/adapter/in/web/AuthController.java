@@ -9,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -24,7 +21,7 @@ public class AuthController {
     private final RegisterUseCase registerUseCase;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest){
+    public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest) {
         log.info("Register request received: {}", registerRequest); // 요청 정보 로그
         String st = registerUseCase.register(registerRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(st);
@@ -35,9 +32,8 @@ public class AuthController {
         try {
             String token = loginUseCase.login(loginRequest);
             return ResponseEntity.ok().body(token);
-        }catch (Exception exception){
+        } catch (Exception exception) {
             return ResponseEntity.status(401).body(exception.getMessage());
         }
     }
-
 }

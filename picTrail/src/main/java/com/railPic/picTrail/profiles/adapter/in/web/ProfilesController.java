@@ -1,8 +1,11 @@
 package com.railPic.picTrail.profiles.adapter.in.web;
 
 
+<<<<<<< HEAD
 import com.railPic.picTrail.profiles.application.port.in.UpdateProfile;
 import com.railPic.picTrail.profiles.application.port.in.UpdateProfileUseCase;
+=======
+>>>>>>> origin/master
 import com.railPic.picTrail.profiles.application.port.in.UpdatePwUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,20 +20,32 @@ import org.springframework.web.bind.annotation.*;
 public class ProfilesController {
 
     private final UpdatePwUseCase updatePwUseCase;
+<<<<<<< HEAD
     private final UpdateProfileUseCase updateProfileUseCase;
 
     @PutMapping("/updatePw/{username}")
     public ResponseEntity<String> updatePw(@PathVariable(name = "username") String username, @RequestBody String password) {
         String updateStatus = updatePwUseCase.updatePw(username, password);
+=======
+
+    @PutMapping("/updatePw/{username}")
+    public ResponseEntity<String> updatePw(@PathVariable(name = "username") String username, @RequestBody String password){
+        String updateStatus = updatePwUseCase.updatePw(username,password);
+>>>>>>> origin/master
         log.info("일단 여기 까지는 들어옴");
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(updateStatus);
     }
 
+<<<<<<< HEAD
     @PutMapping("/updateProfile")
     public ResponseEntity<String> updateProfile(@RequestBody UpdateProfile updateProfile) {
         String updateStatus = updateProfileUseCase.updateProfile(updateProfile);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(updateStatus);
     }
+=======
+
+
+>>>>>>> origin/master
 
 
 }
